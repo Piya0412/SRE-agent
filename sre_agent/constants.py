@@ -19,14 +19,14 @@ class ModelConfig(BaseModel):
 
     # Anthropic model IDs
     anthropic_model_id: str = Field(
-        default="claude-haiku-4-5-20251001",
-        description="Default Anthropic Claude model ID",
+        default="nova-pro-v1",
+        description="Default model ID (using Amazon Nova Pro temporarily)",
     )
 
     # Amazon Bedrock model IDs
     bedrock_model_id: str = Field(
-        default="global.anthropic.claude-haiku-4-5-20251001-v1:0",
-        description="Default Amazon Bedrock Claude model ID",
+        default="us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+        description="Claude 3.5 Sonnet v2 inference profile (switched from Nova due to tool calling issues)",
     )
 
     # Model parameters

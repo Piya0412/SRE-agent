@@ -1,0 +1,79 @@
+botocore.errorfactory.ThrottlingException: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+2026-02-18 02:48:51,858,p1896,{agent_nodes.py:293},ERROR,Operational Runbooks Agent - Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+2026-02-18 02:48:51,859,p1896,{agent_nodes.py:294},ERROR,Full exception details:
+Traceback (most recent call last):
+  File "/home/piyush/projects/SRE-agent/sre_agent/agent_nodes.py", line 283, in __call__
+    await asyncio.wait_for(execute_agent(), timeout=timeout_seconds)
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+--
+botocore.errorfactory.ThrottlingException: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+During task with name 'agent' and id '7872ed0a-97f5-3476-21b9-1f7268aea04a'
+2026-02-18 02:48:51,881,p1896,{agent_nodes.py:298},INFO,Operational Runbooks Agent - Captured response length: 180
+2026-02-18 02:48:51,881,p1896,{agent_nodes.py:302},INFO,Operational Runbooks Agent - Full response: Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+2026-02-18 02:48:51,881,p1896,{agent_nodes.py:340},INFO,Operational Runbooks Agent - Message breakdown: 1 USER, 1 ASSISTANT, 0 TOOL messages
+2026-02-18 02:48:51,881,p1896,{agent_nodes.py:348},INFO,Operational Runbooks Agent - No tools called
+2026-02-18 02:48:51,881,p1896,{conversation_manager.py:132},INFO,Storing conversation batch: 2 messages, user_id=Alice, session_id=prompt-20260218024829, agent=Operational Runbooks Agent
+⠏ 🤖 Runbooks Agent thinking (11.9s)⠋ 🤖 Runbooks Agent thinking (12.0s)⠙ 🤖 Runbooks Agent thinking (12.1s)⠹ 🤖 Runbooks Agent thinking (12.2s)⠸ 🤖 Runbooks Agent thinking (12.3s)⠼ 🤖 Runbooks Agent thinking (12.4s)⠴ 🤖 Runbooks Agent thinking (12.5s)⠦ 🤖 Runbooks Agent thinking (12.6s)⠧ 🤖 Runbooks Agent thinking (12.7s)⠇ 🤖 Runbooks Agent thinking (12.8s)⠏ 🤖 Runbooks Agent thinking (12.9s)2026-02-18 02:48:53,011,p1896,{client.py:337},INFO,Created event: 0000001771363131000#cd128e95
+2026-02-18 02:48:53,011,p1896,{conversation_manager.py:165},INFO,Successfully stored conversation batch of 2 messages (event_id: 0000001771363131000#cd128e95)
+--
+2026-02-18 02:48:57,069,p1896,{multi_agent_langgraph.py:1464},INFO,      Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+2026-02-18 02:48:57,071,p1896,{supervisor.py:734},INFO,Retrieved user preferences from memory_context for aggregation: 0 items
+2026-02-18 02:48:57,071,p1896,{output_formatter.py:37},INFO,Creating LLM for output formatter - Provider: bedrock, Max tokens: 1000
+2026-02-18 02:48:57,071,p1896,{llm_utils.py:59},INFO,Creating LLM with provider: bedrock
+2026-02-18 02:48:57,072,p1896,{llm_utils.py:68},INFO,Creating Bedrock LLM - Model: us.anthropic.claude-3-5-sonnet-20241022-v2:0, Region: us-east-1
+2026-02-18 02:48:57,081,p1896,{output_formatter.py:191},INFO,=== EXECUTIVE SUMMARY PROMPT LOGGING ===
+--
+Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+
+
+Generate a concise, accurate executive summary based only on the evidence provided above. Focus on what executives and on-call engineers need to know immediately.
+2026-02-18 02:48:57,081,p1896,{output_formatter.py:206},INFO,=== END EXECUTIVE SUMMARY PROMPT LOGGING ===
+2026-02-18 02:48:57,085,p1896,{bedrock.py:940},INFO,Using Bedrock Invoke API to generate response
+--
+botocore.errorfactory.ThrottlingException: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+2026-02-18 02:49:12,205,p1896,{output_formatter.py:218},ERROR,Error generating executive summary with LLM: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+2026-02-18 02:49:12,208,p1896,{conversation_manager.py:132},INFO,Storing conversation batch: 1 messages, user_id=Alice, session_id=prompt-20260218024829, agent=Supervisor Agent
+2026-02-18 02:49:12,647,p1896,{client.py:337},INFO,Created event: 0000001771363152000#fcbda8c2
+2026-02-18 02:49:12,647,p1896,{conversation_manager.py:165},INFO,Successfully stored conversation batch of 1 messages (event_id: 0000001771363152000#fcbda8c2)
+2026-02-18 02:49:12,647,p1896,{supervisor.py:858},INFO,Supervisor: Successfully stored final response conversation
+2026-02-18 02:49:12,649,p1896,{strategies.py:318},INFO,Saving investigation summary: incident_id=incident_20260217_211912, actor_id=Alice, session_id=prompt-20260218024829, status=ongoing, actions_count=2, findings_count=0
+--
+      "result_summary": "Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again."
+    }
+  ],
+  "actions_taken": [
+    "Invoked Operational Runbooks Agent agent for investigation",
+    "Operational Runbooks Agent agent detected issues"
+--
+2026-02-18 02:49:12,650,p1896,{client.py:200},INFO,  event_data: {'incident_id': 'incident_20260217_211912', 'query': 'List your available capabilities and tools', 'timeline': [{'timestamp': '2026-02-17T21:19:12.647236', 'agent': 'Operational Runbooks Agent', 'action': 'Executed Operational Runbooks Agent agent', 'result_summary': 'Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.'}], 'actions_taken': ['Invoked Operational Runbooks Agent agent for investigation', 'Operational Runbooks Agent agent detected issues'], 'resolution_status': 'ongoing', 'key_findings': [], 'context': None, 'timestamp': datetime.datetime(2026, 2, 17, 21, 19, 12, 649362)}
+2026-02-18 02:49:12,650,p1896,{client.py:207},INFO,Calling create_event with:
+2026-02-18 02:49:12,650,p1896,{client.py:208},INFO,  memory_id: sre_agent_memory-W7MyNnE0HE
+2026-02-18 02:49:12,650,p1896,{client.py:209},INFO,  actor_id: Alice
+2026-02-18 02:49:12,650,p1896,{client.py:210},INFO,  session_id: prompt-20260218024829
+2026-02-18 02:49:12,650,p1896,{client.py:211},INFO,  messages: [("{'incident_id': 'incident_20260217_211912', 'query': 'List your available capabilities and tools', 'timeline': [{'timestamp': '2026-02-17T21:19:12.647236', 'agent': 'Operational Runbooks Agent', 'action': 'Executed Operational Runbooks Agent agent', 'result_summary': 'Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.'}], 'actions_taken': ['Invoked Operational Runbooks Agent agent for investigation', 'Operational Runbooks Agent agent detected issues'], 'resolution_status': 'ongoing', 'key_findings': [], 'context': None, 'timestamp': datetime.datetime(2026, 2, 17, 21, 19, 12, 649362)}", 'ASSISTANT')]
+2026-02-18 02:49:13,076,p1896,{client.py:337},INFO,Created event: 0000001771363152000#a6ddb2f3
+2026-02-18 02:49:13,076,p1896,{client.py:225},INFO,create_event result: {'memoryId': 'sre_agent_memory-W7MyNnE0HE', 'actorId': 'Alice', 'sessionId': 'prompt-20260218024829', 'eventId': '0000001771363152000#a6ddb2f3', 'eventTimestamp': datetime.datetime(2026, 2, 18, 2, 49, 12, tzinfo=tzlocal()), 'branch': {'name': 'main'}}
+2026-02-18 02:49:13,076,p1896,{client.py:226},INFO,=== SAVE_EVENT TRACE END ===
+2026-02-18 02:49:13,076,p1896,{client.py:227},INFO,Saved investigations event for Alice (event_id: 0000001771363152000#a6ddb2f3)
+2026-02-18 02:49:13,077,p1896,{client.py:230},INFO,Event data size: 720 characters
+--
+- Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+
+## 📋 Next Steps
+
+3. Demonstrate memory system capabilities and investigation patterns
+
+--
+      Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+
+💬 Final Response:
+# 🔍 Investigation Results
+
+**Query:** List your available capabilities and tools
+--
+- Agent execution failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 4): Too many requests, please wait before trying again.
+
+## 📋 Next Steps
+
+3. Demonstrate memory system capabilities and investigation patterns
+
