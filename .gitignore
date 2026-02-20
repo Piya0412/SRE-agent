@@ -92,3 +92,25 @@ backend/retrieve_api_key.py.backup
 
 # Reports (optional - include if you want to track)
 # reports/
+
+# Cleanup - prevent future clutter
+*.log
+*Zone.Identifier
+nul
+.access_token
+.credentials_provider
+.memory_id
+.s3_bucket_name
+deployment_run.log
+ngrok-config.yml
+archive/
+
+# Temporary scripts
+setup_*.sh
+test_*.sh
+debug_*.py
+fix_*.sh
+*_temp.py
+
+# Day reports (keep in archive only)
+DAY*_*.md

@@ -1,5 +1,9 @@
 # SRE Agent - Multi-Agent Site Reliability Engineering Assistant
 
+[![Deployment Status](https://img.shields.io/badge/Deployment-Production%20Ready-success)](DEPLOYMENT_STATUS.md)
+[![AWS AgentCore](https://img.shields.io/badge/AWS-AgentCore%20Runtime-orange)](https://aws.amazon.com/bedrock/)
+[![Docker](https://img.shields.io/badge/Docker-ARM64%20%2B%20x86__64-blue)](Dockerfile)
+
 ## Overview
 
 The SRE Agent is a multi-agent system for Site Reliability Engineers that helps investigate infrastructure issues. Built on the Model Context Protocol (MCP) and powered by Amazon Nova and Anthropic Claude models (Claude can be accessed through Amazon Bedrock or directly through Anthropic), this system uses specialized AI agents that collaborate to investigate issues, analyze logs, monitor performance metrics, and execute operational procedures. The AgentCore Gateway provides access to data sources and systems available as MCP tools. This example also demonstrates how to deploy the agent using the Amazon Bedrock AgentCore Runtime for production environments.
