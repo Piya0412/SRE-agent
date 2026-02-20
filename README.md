@@ -6,7 +6,7 @@
 
 ## Overview
 
-The SRE Agent is a multi-agent system for Site Reliability Engineers that helps investigate infrastructure issues. Built on the Model Context Protocol (MCP) and powered by Amazon Nova and Anthropic Claude models (Claude can be accessed through Amazon Bedrock or directly through Anthropic), this system uses specialized AI agents that collaborate to investigate issues, analyze logs, monitor performance metrics, and execute operational procedures. The AgentCore Gateway provides access to data sources and systems available as MCP tools. This example also demonstrates how to deploy the agent using the Amazon Bedrock AgentCore Runtime for production environments.
+The SRE Agent is a multi-agent system for Site Reliability Engineers that helps investigate infrastructure issues. Built on the Model Context Protocol (MCP) and powered by Claude 3.5 Haiku v2 via Amazon Bedrock, this system uses specialized AI agents that collaborate to investigate issues, analyze logs, monitor performance metrics, and execute operational procedures. The AgentCore Gateway provides access to data sources and systems available as MCP tools. This example demonstrates deployment using the Amazon Bedrock AgentCore Runtime for production environments.
 
 ### Use case details
 | Information         | Details                                                                                                                             |
@@ -86,10 +86,11 @@ uv pip install -e .
 
 # Configure environment variables
 cp sre_agent/.env.example sre_agent/.env
-# Edit sre_agent/.env and add your Anthropic API key if using Anthropic directly:
-# ANTHROPIC_API_KEY=sk-ant-your-key-here
+# Edit sre_agent/.env and configure:
+# - GATEWAY_ACCESS_TOKEN (from gateway/.access_token)
+# - LLM_PROVIDER=bedrock (default, uses Claude 3.5 Haiku v2)
 # 
-# Note: If you are using Amazon Bedrock models for inference, you do not need to
+# Note: Using Amazon Bedrock for inference (no API key needed)
 # make any changes to the .env file - the defaults are good to get started
 
 # Openapi Templates get replaced with your backend domain and saved as .yaml
@@ -273,7 +274,7 @@ For production deployments, you can deploy the SRE Agent directly to Amazon Bedr
 
 The AgentCore Runtime deployment supports:
 - **Container-based deployment** with automatic scaling
-- **Multiple LLM providers** (Amazon Bedrock or Anthropic Claude)
+- **Amazon Bedrock LLM** (Claude 3.5 Haiku v2)
 - **Debug mode** for troubleshooting and development
 - **Environment-based configuration** for different deployment stages
 - **Secure credential management** through AWS IAM and environment variables

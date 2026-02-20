@@ -9,7 +9,7 @@ The official architecture diagram shows these key components:
 2. **AgentCore Gateway** - Translates OpenAPI specs to MCP tools, handles authentication
 3. **AgentCore Memory** - Stores session and previous interactions
 4. **AgentCore Identity (Amazon Cognito)** - Authenticates users
-5. **Amazon Bedrock LLMs** - Powers the AI (Claude/Nova models)
+5. **Amazon Bedrock LLMs** - Powers the AI (Claude 3.5 Haiku v2)
 6. **AgentCore Observability** - Monitors agent traces
 
 **Outside AWS Cloud (Your Infrastructure):**

@@ -28,14 +28,13 @@ Create the appropriate `.env` files with these variables:
 GATEWAY_ACCESS_TOKEN=your_gateway_access_token
 LLM_PROVIDER=bedrock
 DEBUG=false
-# If using Anthropic provider, also add:
-# ANTHROPIC_API_KEY=sk-ant-your-key-here
+# Note: Using Amazon Bedrock (no Anthropic API key needed)
+
 ```
 
 **For deployment/.env (container building and deployment):**
 ```bash
 GATEWAY_ACCESS_TOKEN=your_gateway_access_token
-ANTHROPIC_API_KEY=sk-ant-your-key-here
 # These can be overridden by environment variables during build/deploy
 ```
 
@@ -71,11 +70,8 @@ uv run sre-agent --prompt "list the pods in my infrastructure" --debug
 uv run sre-agent --prompt "list the pods in my infrastructure" --provider bedrock --debug
 ```
 
-#### 1.3 Test CLI with Anthropic Provider
 
 ```bash
-# Ensure ANTHROPIC_API_KEY is set in your .env file, then:
-uv run sre-agent --prompt "list the pods in my infrastructure" --provider anthropic --debug
 ```
 
 **Expected Output**: You should see the agent processing your request, routing to appropriate specialized agents, and returning infrastructure information.
@@ -121,10 +117,8 @@ docker run -p 8080:8080 --env-file sre_agent/.env -e DEBUG=true my_custom_sre_ag
 
 **Note**: The container name matches the ECR repository name you specified during build.
 
-#### 2.3 Test Local Container with Anthropic
 
 ```bash
-# Using .env file (ensure LLM_PROVIDER=anthropic is set in sre_agent/.env)
 docker run -p 8080:8080 --env-file sre_agent/.env my_custom_sre_agent:latest
 
 # With debug enabled (override DEBUG setting from .env file)
@@ -134,7 +128,6 @@ docker run -p 8080:8080 \
   my_custom_sre_agent:latest
 ```
 
-**Note**: Ensure both `LLM_PROVIDER=anthropic` and `ANTHROPIC_API_KEY` are set in your `sre_agent/.env` file when using the anthropic provider.
 
 #### 2.4 Test Container with curl
 
@@ -172,17 +165,13 @@ DEBUG=true ./deployment/build_and_deploy.sh my_custom_sre_agent
 LLM_PROVIDER=bedrock DEBUG=true ./deployment/build_and_deploy.sh my_custom_sre_agent
 ```
 
-#### 3.2 Deploy to AgentCore with Anthropic
 
 ```bash
 # Deploy with Anthropic provider (ensure ANTHROPIC_API_KEY is in deployment/.env)
-LLM_PROVIDER=anthropic ./deployment/build_and_deploy.sh my_custom_sre_agent
 
 # Deploy with Anthropic and debug enabled
-DEBUG=true LLM_PROVIDER=anthropic ./deployment/build_and_deploy.sh my_custom_sre_agent
 
 # Override API key via environment variable
-LLM_PROVIDER=anthropic ANTHROPIC_API_KEY=sk-ant-your-key ./deployment/build_and_deploy.sh my_custom_sre_agent
 ```
 
 **Build Script Usage:**
@@ -307,19 +296,14 @@ docker run -p 8080:8080 --env-file sre_agent/.env my_custom_sre_agent:latest
 LLM_PROVIDER=bedrock ./deployment/build_and_deploy.sh my_custom_sre_agent
 ```
 
-### Using Anthropic Claude
 ```bash
 # CLI (reads LLM_PROVIDER and ANTHROPIC_API_KEY from sre_agent/.env)
-uv run sre-agent --provider anthropic --prompt "your query"
 
-# Container (reads LLM_PROVIDER=anthropic and ANTHROPIC_API_KEY from sre_agent/.env)
 docker run -p 8080:8080 --env-file sre_agent/.env my_custom_sre_agent:latest
 
 # Deployment (reads from deployment/.env, can override via environment variable)
-LLM_PROVIDER=anthropic ./deployment/build_and_deploy.sh my_custom_sre_agent
 
 # Override API key via environment variable (if not in deployment/.env)
-LLM_PROVIDER=anthropic ANTHROPIC_API_KEY=sk-ant-xxx ./deployment/build_and_deploy.sh my_custom_sre_agent
 ```
 
 ## Troubleshooting
@@ -402,6 +386,5 @@ uv run python deployment/invoke_agent_runtime.py \
 1. **Development**: Always test locally first
 2. **Environment Files**: Use `.env` files for consistent configuration
 3. **Debug Mode**: Enable debug mode when troubleshooting
-4. **Provider Testing**: Test both Bedrock and Anthropic providers if using both
 5. **Incremental Deployment**: Deploy to staging environment before production
 

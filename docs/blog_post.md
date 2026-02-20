@@ -119,8 +119,7 @@ Once deployed with observability enabled, you gain visibility into:
 The observability primitive automatically captures these metrics without additional code changes, providing production-grade monitoring capabilities out of the box.
 
 **Foundation Models**: The system supports two providers for the Claude language models:
-- **Amazon Bedrock**: Claude Haiku 4.5 (global.anthropic.claude-haiku-4-5-20251001-v1:0) for AWS-integrated deployments
-- **Anthropic Direct**: Claude Haiku 4.5 (claude-haiku-4-5-20251001) for direct API access
+- **Amazon Bedrock**: Claude 3.5 Haiku v2 (us.anthropic.claude-3-5-haiku-20241022-v1:0) for AWS-integrated deployments
 
 ### Development to Production Flow
 
@@ -174,9 +173,8 @@ To implement this solution, you need the following:
 * **EC2 instance** (recommended: `t3.xlarge` or larger) for hosting the demo backend servers and as the development machine for building this solution
 * **SSL certificates** for HTTPS endpoints (required by Amazon Bedrock AgentCore Gateway)
 * **API credentials** for either:
-  * Anthropic API key for direct Claude model access, OR
   * AWS credentials configured for Amazon Bedrock access
-* **Model access** enabled in Amazon Bedrock for Claude models (Claude 3.7 Sonnet)
+* **Model access** enabled in Amazon Bedrock for Claude models (Claude 3.5 Haiku v2)
 
 ## Implementation walkthrough
 

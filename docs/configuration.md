@@ -45,8 +45,7 @@ The SRE Agent uses environment variables for sensitive configuration values. Cre
 
 ```bash
 # Required: API key for Claude model access
-# For Anthropic direct access:
-ANTHROPIC_API_KEY=sk-ant-api-key-here
+# Note: Using Amazon Bedrock (no API key needed)
 
 # For Amazon Bedrock access:
 AWS_DEFAULT_REGION=us-east-1
