@@ -16,7 +16,7 @@ def check_targets():
     
     try:
         response = client.list_gateway_targets(gatewayIdentifier=GATEWAY_ID)
-        targets = response.get('targets', [])
+        targets = response.get('items', [])  # API returns 'items' not 'targets'
         
         if not targets:
             print("❌ No targets found!")

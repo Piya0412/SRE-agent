@@ -25,8 +25,8 @@ class ModelConfig(BaseModel):
 
     # Amazon Bedrock model IDs
     bedrock_model_id: str = Field(
-        default="us.anthropic.claude-3-5-sonnet-20241022-v2:0",
-        description="Claude 3.5 Sonnet v2 inference profile (switched from Nova due to tool calling issues)",
+        default="us.anthropic.claude-3-5-haiku-20241022-v1:0",
+        description="Claude 3.5 Haiku v2 inference profile (higher rate limits than Sonnet)",
     )
 
     # Model parameters
