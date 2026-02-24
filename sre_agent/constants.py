@@ -25,8 +25,8 @@ class ModelConfig(BaseModel):
 
     # Amazon Bedrock model IDs
     bedrock_model_id: str = Field(
-        default="us.anthropic.claude-3-haiku-20240307-v1:0",
-        description="Claude 3 Haiku cross-region inference profile (higher rate limits)",
+        default="us.amazon.nova-pro-v1:0",
+        description="Amazon Nova Pro (free tier, no marketplace subscription needed)",
     )
 
     # Model parameters

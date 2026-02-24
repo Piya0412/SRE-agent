@@ -1,0 +1,6 @@
+USER_POOL_ID=us-east-1_FDj2YGeRG
+COGNITO_DOMAIN=https://sre-agent-1771923706-794.auth.us-east-1.amazoncognito.com
+DOMAIN_PREFIX=sre-agent-1771923706-794
+RESOURCE_SERVER_ID=sre-agent-api
+COGNITO_CLIENT_ID=5gsrgi5c7ltru1iu2ltgqjvc47
+COGNITO_CLIENT_SECRET=1jl5dechmrvaej5srbph6sghs38o1i90cpsvgsrfik57ga4ulqm

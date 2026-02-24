@@ -4,9 +4,9 @@ info:
   version: 1.0.0
   description: API for accessing Kubernetes cluster data and analysis
 servers:
-  - url: https://lucas-unfortuitous-amara.ngrok-free.dev/k8s:8011
+  - url: https://lucas-unfortuitous-amara.ngrok-free.dev/k8s
     description: Remote development server for K8s API
-  - url: https://localhost:8011
+  - url: http://localhost:8011
     description: Local development server for K8s API
 
 security:

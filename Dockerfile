@@ -1,25 +1,52 @@
-# Use uv's ARM64 Python base image
-FROM --platform=linux/arm64 ghcr.io/astral-sh/uv:python3.12-bookworm-slim
+# Multi-stage build for SRE Agent
+FROM python:3.12-slim AS builder
 
+# Install uv for fast dependency management
+RUN pip install --no-cache-dir uv
+
+# Set working directory
 WORKDIR /app
 
-# Copy uv files
+# Copy dependency files
 COPY pyproject.toml uv.lock ./
 
-# Install dependencies
-RUN uv sync --frozen --no-dev
+# Install dependencies using uv
+RUN uv pip install --system --no-cache -r pyproject.toml
 
-# Copy SRE agent module
+# Final stage
+FROM python:3.12-slim
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy installed packages from builder
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+
+# Copy application code
 COPY sre_agent/ ./sre_agent/
+COPY backend/ ./backend/
+COPY gateway/ ./gateway/
+COPY scripts/ ./scripts/
 
-# Set environment variables
-# Note: Set DEBUG=true to enable debug logging and traces
-ENV PYTHONPATH="/app" \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# Set Python path
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
 
-# Expose port
-EXPOSE 8080
+# Create non-root user
+RUN useradd -m -u 1000 sre-agent && \
+    chown -R sre-agent:sre-agent /app
 
-# Run application with OpenTelemetry instrumentation
-CMD ["uv", "run", "opentelemetry-instrument", "uvicorn", "sre_agent.agent_runtime:app", "--host", "0.0.0.0", "--port", "8080"] 
+USER sre-agent
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import sre_agent; print('healthy')" || exit 1
+
+# Default command
+CMD ["python", "-m", "sre_agent.cli"]

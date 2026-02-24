@@ -8,10 +8,10 @@ import sys
 import time
 
 # Configuration
-GATEWAY_ID = "sre-gateway-rks2qobw3q"
+GATEWAY_ID = "sre-gateway-rrhmyjghhe"
 REGION = "us-east-1"
-S3_BUCKET = "sre-agent-specs-1771225925"
-PROVIDER_ARN = "arn:aws:bedrock-agentcore:us-east-1:310485116687:token-vault/default/apikeycredentialprovider/sre-agent-api-key-credential-provider"
+S3_BUCKET = "sreagent-friend-account-1771924262"
+PROVIDER_ARN = "arn:aws:bedrock-agentcore:us-east-1:573054851765:token-vault/default/apikeycredentialprovider/sre-agent-api-key-credential-provider"
 
 # API targets configuration
 TARGETS = [

@@ -82,19 +82,19 @@ cd "$BACKEND_DIR/servers"
 
 # K8s API Server (Port 8011)
 echo "🏗️  Starting Kubernetes API server on port 8011..."
-nohup bash -c "python3 k8s_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/k8s_server.log" 2>&1 &
+nohup bash -c "export BACKEND_API_KEY='$BACKEND_API_KEY'; python3 k8s_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/k8s_server.log" 2>&1 &
 
 # Logs API Server (Port 8012)
 echo "📋 Starting Logs API server on port 8012..."
-nohup bash -c "python3 logs_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/logs_server.log" 2>&1 &
+nohup bash -c "export BACKEND_API_KEY='$BACKEND_API_KEY'; python3 logs_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/logs_server.log" 2>&1 &
 
 # Metrics API Server (Port 8013)
 echo "📈 Starting Metrics API server on port 8013..."
-nohup bash -c "python3 metrics_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/metrics_server.log" 2>&1 &
+nohup bash -c "export BACKEND_API_KEY='$BACKEND_API_KEY'; python3 metrics_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/metrics_server.log" 2>&1 &
 
 # Runbooks API Server (Port 8014)
 echo "📚 Starting Runbooks API server on port 8014..."
-nohup bash -c "python3 runbooks_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/runbooks_server.log" 2>&1 &
+nohup bash -c "export BACKEND_API_KEY='$BACKEND_API_KEY'; python3 runbooks_server.py $SERVER_ARGS" > "$PROJECT_ROOT/logs/runbooks_server.log" 2>&1 &
 
 # Wait a moment for servers to start
 sleep 2

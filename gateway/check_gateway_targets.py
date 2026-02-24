@@ -5,7 +5,7 @@ import boto3
 import time
 import sys
 
-GATEWAY_ID = "sre-gateway-rks2qobw3q"
+GATEWAY_ID = "sre-gateway-rrhmyjghhe"
 REGION = "us-east-1"
 
 def check_targets():
