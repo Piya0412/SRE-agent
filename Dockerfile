@@ -2,7 +2,7 @@
 FROM public.ecr.aws/docker/library/python:3.12-slim AS builder
 
 # Install uv for fast dependency management
-RUN pip install --no-cache-dir uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 # Set working directory
 WORKDIR /app
@@ -10,8 +10,8 @@ WORKDIR /app
 # Copy dependency files
 COPY pyproject.toml uv.lock ./
 
-# Install dependencies using uv
-RUN uv pip install --system --no-cache -r pyproject.toml
+# Install dependencies using uv with lockfile
+RUN uv pip install --system --no-cache --compile-bytecode -r uv.lock
 
 # Final stage
 FROM public.ecr.aws/docker/library/python:3.12-slim
