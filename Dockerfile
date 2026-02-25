@@ -10,8 +10,8 @@ WORKDIR /app
 # Copy dependency files
 COPY pyproject.toml uv.lock ./
 
-# Install dependencies using uv with lockfile
-RUN uv pip install --system --no-cache --compile-bytecode -r uv.lock
+# Install dependencies using uv sync
+RUN uv sync --frozen --no-dev --no-install-project
 
 # Final stage
 FROM public.ecr.aws/docker/library/python:3.12-slim
@@ -24,9 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Set working directory
 WORKDIR /app
 
-# Copy installed packages from builder
-COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
-COPY --from=builder /usr/local/bin /usr/local/bin
+# Copy virtual environment from builder
+COPY --from=builder /app/.venv /app/.venv
 
 # Copy application code
 COPY sre_agent/ ./sre_agent/
@@ -34,7 +33,8 @@ COPY backend/ ./backend/
 COPY gateway/ ./gateway/
 COPY scripts/ ./scripts/
 
-# Set Python path
+# Set Python path to use venv
+ENV PATH="/app/.venv/bin:$PATH"
 ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 
