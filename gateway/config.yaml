@@ -1,5 +1,5 @@
 account_id: '573054851765'
-client_id: 5gsrgi5c7ltru1iu2ltgqjvc47
+client_id: 6h8v378smrepjq85t7brskkv93
 credential_provider_endpoint_url: https://bedrock-agentcore-control.us-east-1.amazonaws.com
 credential_provider_name: sre-agent-api-key-credential-provider
 endpoint_url: https://bedrock-agentcore-control.us-east-1.amazonaws.com
@@ -11,4 +11,4 @@ role_name: BedrockAgentCoreGatewayRole
 s3_bucket: 'sreagent-friend-account-1771924262'
 s3_path_prefix: devops-multiagent-demo
 target_description: S3 target for OpenAPI schema
-user_pool_id: us-east-1_FDj2YGeRG
+user_pool_id: us-east-1_HlFyLjX0m

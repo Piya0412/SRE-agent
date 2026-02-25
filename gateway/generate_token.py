@@ -84,7 +84,7 @@ def _get_cognito_token(
 
 
 def _save_access_token(
-    token_response: Dict[str, Any], output_file: str = ".access_token"
+    token_response: Dict[str, Any], output_file: str = "gateway/.access_token"
 ) -> None:
     """
     Save the access token to a file.
@@ -94,7 +94,9 @@ def _save_access_token(
         output_file: Output file path
     """
     access_token = token_response["access_token"]
-    Path(output_file).write_text(access_token)
+    output_path = Path(output_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(access_token)
     logging.info(f"Access token saved to {output_file}")
     logging.info(
         f"Token expires in {token_response.get('expires_in', 'unknown')} seconds"

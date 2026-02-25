@@ -13,10 +13,10 @@
 - **BedrockAgentCoreGatewayRole**: `arn:aws:iam::573054851765:role/BedrockAgentCoreGatewayRole`
 
 ### Phase 2: Cognito Setup ✅
-- **User Pool ID**: `us-east-1_FDj2YGeRG`
-- **Client ID**: `5gsrgi5c7ltru1iu2ltgqjvc47`
-- **Client Secret**: `1jl5dechmrvaej5srbph6sghs38o1i90cpsvgsrfik57ga4ulqm`
-- **Domain**: `https://sre-agent-1771923706-794.auth.us-east-1.amazoncognito.com`
+- **User Pool ID**: `us-east-1_HlFyLjX0m`
+- **Client ID**: `6h8v378smrepjq85t7brskkv93`
+- **Client Secret**: `1k3qs8i6guovka27darocojta6t6ppkrupi27c3pgt88v5a228rm`
+- **Domain**: `https://sre-agent-1772052612-379.auth.us-east-1.amazoncognito.com`
 - **Access Token**: Generated and saved to `gateway/.access_token`
 
 ### Phase 3: Backend + ngrok ✅
