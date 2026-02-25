@@ -1,31 +1,13 @@
-# Multi-stage build for SRE Agent
-FROM public.ecr.aws/docker/library/python:3.12-slim AS builder
+# Use uv's ARM64 Python base image
+FROM --platform=linux/arm64 ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
-# Install uv for fast dependency management
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
-
-# Set working directory
 WORKDIR /app
 
-# Copy dependency files
+# Copy uv files
 COPY pyproject.toml uv.lock ./
 
-# Install dependencies using uv sync
-RUN uv sync --frozen --no-dev --no-install-project
-
-# Final stage
-FROM public.ecr.aws/docker/library/python:3.12-slim
-
-# Install runtime dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set working directory
-WORKDIR /app
-
-# Copy virtual environment from builder
-COPY --from=builder /app/.venv /app/.venv
+# Install dependencies
+RUN uv sync --frozen --no-dev
 
 # Copy application code
 COPY sre_agent/ ./sre_agent/
@@ -33,20 +15,13 @@ COPY backend/ ./backend/
 COPY gateway/ ./gateway/
 COPY scripts/ ./scripts/
 
-# Set Python path to use venv
-ENV PATH="/app/.venv/bin:$PATH"
-ENV PYTHONPATH=/app
-ENV PYTHONUNBUFFERED=1
+# Set environment variables
+ENV PYTHONPATH="/app" \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# Create non-root user
-RUN useradd -m -u 1000 sre-agent && \
-    chown -R sre-agent:sre-agent /app
+# Expose port
+EXPOSE 8080
 
-USER sre-agent
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD python -c "import sre_agent; print('healthy')" || exit 1
-
-# Default command
-CMD ["python", "-m", "sre_agent.cli"]
+# Run application with OpenTelemetry instrumentation
+CMD ["uv", "run", "opentelemetry-instrument", "uvicorn", "sre_agent.agent_runtime:app", "--host", "0.0.0.0", "--port", "8080"]
