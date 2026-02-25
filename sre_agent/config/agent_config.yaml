@@ -52,5 +52,5 @@ aws:
 
 # Gateway configuration
 gateway:
-  uri: "https://sre-gateway-rks2qobw3q.gateway.bedrock-agentcore.us-east-1.amazonaws.com"
+  uri: "https://sre-gateway-rrhmyjghhe.gateway.bedrock-agentcore.us-east-1.amazonaws.com"
 
