@@ -25,7 +25,7 @@ class ModelConfig(BaseModel):
 
     # Amazon Bedrock model IDs
     bedrock_model_id: str = Field(
-        default="anthropic.claude-3-haiku-20240307-v1:0",
+        default="us.amazon.nova-lite-v1:0",
         description="Amazon Nova Pro (free tier, no marketplace subscription needed)",
     )
 
